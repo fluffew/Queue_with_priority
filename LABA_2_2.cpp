@@ -1,8 +1,19 @@
 ﻿#include <iostream>
-#include "Queue.h"
 #include <stdlib.h>
+#include <exception>
+#include "Queue.h"
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
+
+void check_fail() {
+    if (cin.fail()) {
+        cin.clear();
+        throw std::exception("ERROR: Wrong input");
+    }
+}
+
 
 int main()
 {
@@ -20,12 +31,7 @@ int main()
                 << "6. To clear the console;\n"
                 << "7. Exit\n";
             cin >> option;
-            if (cin.fail()) {
-                cin.clear();
-                cout << "ERROR: Wrong input" << endl;
-                return 0;
-            }
-
+            check_fail();
             switch (option) {
             case 1: {
                 cout << "The amount of elements is " << queue.size()
@@ -42,6 +48,7 @@ int main()
                 int value, priority;
                 cout << "Enter the value: ";
                 cin >> value;
+                check_fail();
                 cout << "Enter the priority:\n\t1) HIGH\n\t2) MEDIUM\n\t3) LOW\n";
                 cin >> priority;
                 switch (priority) {
@@ -89,8 +96,8 @@ int main()
             }
         }
     }
-    catch (exception& error) {
-        cerr << error.what() << endl;
+    catch (std::exception& error) {
+        std::cerr << error.what() << endl;
     }
 
     return 0;
