@@ -142,6 +142,10 @@ void Queue::clear() {
 		element = element->next;
 		pop();
 	}
+	rear_low = nullptr;
+	rear_medium = nullptr;
+	rear_high = nullptr;
+	head = nullptr;
 }
 
 int Queue::size() const {
